@@ -12,6 +12,8 @@ django.setup()
 # Import models from sales_rest, here.
 # from sales_rest.models import Something
 
+from service_rest.models import AutomobileVO
+
 def poll():
     while True:
         print('Sales poller polling for data')

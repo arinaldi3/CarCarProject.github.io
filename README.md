@@ -3,7 +3,9 @@
 Team:
 
 * Person 1 - Which microservice?
+Nate Endicott - Auto Services
 * Person 2 - Which microservice?
+Ava Rinaldi - Auto Sales
 
 ## Design
 
