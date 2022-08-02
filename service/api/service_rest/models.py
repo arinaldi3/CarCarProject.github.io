@@ -16,7 +16,7 @@ class ServiceAppoinment(models.Model):
     customer_name = models.CharField(max_length=100)
     date = models.DateField(null=True)
     time = models.TimeField(null=True)
-    assigned_tech = models.ForeignKey( 'Technician', related_name="appointment", on_delete=models.PROTECT)
+    technician = models.ForeignKey( 'Technician', related_name="appointment", on_delete=models.PROTECT)
     reason = models.CharField(max_length=200)
     vip = models.BooleanField(default=False)
     finished = models.BooleanField(default=False)
