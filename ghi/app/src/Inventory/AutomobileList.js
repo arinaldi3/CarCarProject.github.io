@@ -7,7 +7,7 @@ function AutomobileList() {
         const url = 'http://localhost:8100/api/automobiles/'
         const response = await fetch(url)
         const autosJson = await response.json();
-        setModels(autosJson.models)
+        setModels(autosJson.autos)
     }
     useEffect(() => {
         fetchAutomobiles()
@@ -28,10 +28,11 @@ return (
             {models.map(model => {
                 return (
                     <tr key={model.vin}>
+                        <td>{model.vin}</td>
                         <td>{model.color}</td>
                         <td>{model.year}</td>
                         <td>{model.model.name}</td>
-                        <td>{model.manufacturer}</td>
+                        <td>{model.model.manufacturer.name}</td>
                     </tr>
                 );
             })}

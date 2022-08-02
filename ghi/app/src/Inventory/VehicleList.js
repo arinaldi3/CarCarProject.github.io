@@ -7,7 +7,7 @@ function VehicleList() {
         const url = 'http://localhost:8100/api/models/'
         const response = await fetch(url)
         const vehiclesJson = await response.json();
-        setVehicles(vehiclesJson.vehicles)
+        setVehicles(vehiclesJson.models)
     }
     useEffect(() => {
         fetchVehicles()
@@ -23,7 +23,7 @@ return (
             </tr>
         </thead>
         <tbody>
-            {vehicles.map(vehicle => {
+            {vehicles.map((vehicle) => {
                 return (
                     <tr key={vehicle.id}>
                         <td>{vehicle.manufacturer.name}</td>
