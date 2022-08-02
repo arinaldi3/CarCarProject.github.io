@@ -1,17 +1,5 @@
-import React, { Component, useEffect, useState} from 'react';
-// class ManufacturerList extends Component {
-//     constructor(props){
-//         super(props)
-//         this.state = {manufacturers: []}
-//     }
+import React, { useEffect, useState} from 'react';
 
-//     async componentDidMount()
-//     {
-//         const url = "http://localhost:8100/api/manufacturers"
-//         const response = await fetch(url)
-//         const manufacturerJSON = await response.json()
-//         this.setState({manufacturers: manufacturerJSON.manufacturers})
-//     }
 function ManufacturerList(){
 
  const [manufacturers, setManufacturers] = useState([])
@@ -45,7 +33,7 @@ return (
             </tbody>
         </table>
     );
-            }
+}
 
 
 export default ManufacturerList;

@@ -5,6 +5,9 @@ import ServiceAppointmentForm from './ServiceAppointmentForm';
 import ServiceAppointmentList from './ServiceAppointmentList';
 
 import ManufacturerList from './Inventory/ManufacturerList';
+import VehicleList from './Inventory/VehicleList';
+import AutomobileList from './Inventory/AutomobileList';
+
 
 function App() {
  
@@ -20,6 +23,12 @@ function App() {
           </Route>
           <Route path="manufacturers">
             <Route index element={<ManufacturerList />} />
+          </Route>
+          <Route path="vehicles">
+            <Route index element={<VehicleList />} />
+          </Route>
+          <Route path="automobiles">
+            <Route index element={<AutomobileList />} />
           </Route>
         </Routes>
       </div>
