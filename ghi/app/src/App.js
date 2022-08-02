@@ -6,23 +6,21 @@ import ServiceAppointmentList from './ServiceAppointmentList';
 
 import ManufacturerList from './Inventory/ManufacturerList';
 
-function App(props) {
-  if (props.appointments === undefined){
-    return null;
-  }
+function App() {
+ 
   return (
     <BrowserRouter>
       <Nav />
       <div className="container">
         <Routes>
           <Route path="/" element={<MainPage />} />
-          {/* <Route path="/appointments" >
+          <Route path="/appointments" >
             <Route path="new" element={<ServiceAppointmentForm/>} />
-            <Route path="" element={<ServiceAppointmentList appointments={props.appointments}/>}/>
+            <Route path="" element={<ServiceAppointmentList/>}/>
           </Route>
           <Route path="manufacturers">
-            <Route index element={<ManufacturerList />} /> */}
-          {/* </Route> */}
+            <Route index element={<ManufacturerList />} />
+          </Route>
         </Routes>
       </div>
     </BrowserRouter>

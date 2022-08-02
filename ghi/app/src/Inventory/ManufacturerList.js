@@ -1,21 +1,33 @@
-import React, { Component} from 'react';
+import React, { Component, useEffect, useState} from 'react';
+// class ManufacturerList extends Component {
+//     constructor(props){
+//         super(props)
+//         this.state = {manufacturers: []}
+//     }
 
-class ManufacturerList extends Component {
-    constructor(props){
-        super(props)
-        this.state = {manufacturers: []}
-    }
+//     async componentDidMount()
+//     {
+//         const url = "http://localhost:8100/api/manufacturers"
+//         const response = await fetch(url)
+//         const manufacturerJSON = await response.json()
+//         this.setState({manufacturers: manufacturerJSON.manufacturers})
+//     }
+function ManufacturerList(){
 
-    async componentDidMount()
-    {
-        const url = "http://localhost:8100/api/manufacturers"
-        const response = await fetch(url)
-        const manufacturerJSON = await response.json()
-        this.setState({manufacturers: manufacturerJSON.manufacturers})
-    }
+ const [manufacturers, setManufacturers] = useState([])
 
-render() {
-    return (
+  const fetchManufacturers = async () => {
+      const url = 'http://localhost:8100/api/manufacturers/'
+      const response = await fetch(url)
+      const manufacturersJson = await response.json();
+      setManufacturers(manufacturersJson.manufacturers)
+  }
+  useEffect(() => {
+      fetchManufacturers()
+  }, []);
+
+
+return (
         <table className="table table-striped">
             <thead>
                 <tr>
@@ -23,7 +35,7 @@ render() {
                 </tr>
             </thead>
             <tbody>
-                {this.state.manufacturers.map(manufacturer => {
+                {manufacturers.map(manufacturer => {
                     return (
                         <tr key={manufacturer.id}>
                             <td>{manufacturer.name}</td>
@@ -33,8 +45,7 @@ render() {
             </tbody>
         </table>
     );
-    }
-}
+            }
 
 
-export default ManufacturerList
+export default ManufacturerList;
