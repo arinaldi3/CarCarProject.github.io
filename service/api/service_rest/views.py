@@ -11,7 +11,7 @@ import json
 
 class AutomobileVOEncoder(ModelEncoder):
     model = AutomobileVO
-    properties = ["href", "vin"]
+    properties = ["import_href", "vin"]
 
 
 class TechnicianListEncoder(ModelEncoder):
