@@ -116,7 +116,7 @@ render() {
                 </div>
                 <div className="form-floating mb-3">
                     <input onChange={this.handleChange} value = {this.state.sale_price}placeholder="Sale price" required type="number" name="sale_price" id="sale_price" className="form-control" />
-                    <label htmlFor="starts">Sale price</label>
+                    <label htmlFor="sale_price">Sale price</label>
                 </div>
                 <button className="btn btn-primary">Create</button>
                 </form>
