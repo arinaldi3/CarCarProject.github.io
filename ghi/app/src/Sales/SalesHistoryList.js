@@ -7,7 +7,10 @@ class SalesHistoryList extends Component {
             sales: [],
             salespeople: [],
             salesperson: '',
+            filteredSales: [],
         }
+        this.handleChange = this.handleChange.bind(this)
+        this.updateRecords = this.updateRecords.bind(this)
     }
 
     async componentDidMount() {
@@ -21,33 +24,36 @@ class SalesHistoryList extends Component {
             const salesData = await salesResponse.json();
             const salespeopleData = await salespeopleResponse.json();
             console.log(salesData)
-        
-
 
             // const unfilteredSalesRecord = salesData.sales.map(sales => sales.salespeople)
             // const filteredSalesRecord = salespeopleData.
             // console.log(filteredSalesRecord)
-        
 
             this.setState({
                 sales: salesData.sales,
                 salespeople: salespeopleData.salespeople})
-                // console.log(salesData.sales)
-                // console.log(salespeopleData.salespeople)
         }
+    }
+    updateRecords(salesperson) {
+        let newArr = []
+        this.state.sales.forEach((record => {
+            if (record.salesperson.employee_number === Number(salesperson)) {
+                newArr.push(record)
+            }
+        }))
+        this.setState({
+            ...this.state,
+            filteredSales: newArr
+        })
     }
 
     handleChange(event) {
         const value = event.target.value;
-        this.setState({salesperson:value})
+        this.setState({
+            salesperson:value,
+        })
+        this.updateRecords(value)
     }
-    // async handleChange(event) {
-    //     const value = event.target.value
-    //     const key = event.target.name
-    //     const changeDict = {}
-    //     changeDict[key] = value
-    //     this.setState(changeDict)
-    // }
 
 render() {
     return (
@@ -71,20 +77,15 @@ render() {
                 </tr>
             </thead>
             <tbody>
-                {this.state.sales.map(salesrecord => {
-                    if (salesrecord.salesperson===true) {
-                        return (
-                            <tr key={salesrecord.id}>
-                                <td>{salesrecord.salesperson.name}</td>
-                                <td>{salesrecord.customer.name}</td>
-                                <td>{salesrecord.automobile.vin}</td>
-                                <td>{salesrecord.sale_price}</td>
-                            </tr>
-                        );
-                    }
-                    else {
-                        return '';
-                    }
+                {this.state.filteredSales.map((salesrecord, index) => {
+                    return (
+                        <tr key={index}>
+                            <td>{salesrecord.salesperson.name}</td>
+                            <td>{salesrecord.customer.name}</td>
+                            <td>{salesrecord.automobile.vin}</td>
+                            <td>{salesrecord.sale_price}</td>
+                        </tr>
+                    );
                 })}
             </tbody>
         </table>
