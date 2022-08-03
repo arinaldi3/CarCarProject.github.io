@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 
-function ManufacturerForm() {
+function VehicleForm() {
     const [state, setState] = useState({
         name:'',
+        manufacturer:'',
+        picture_url:'',
 
     });
 
@@ -10,7 +12,7 @@ function ManufacturerForm() {
         event.preventDefault();
         const data = state;
 
-        const manufacturerUrl = 'http://localhost:8100/api/manufacturers/'
+        const vehicleUrl = 'http://localhost:8100/api/models/'
         const fetchConfig = {
             method: "post",
             body: JSON.stringify(data),
@@ -18,10 +20,12 @@ function ManufacturerForm() {
                 'Content-Type': 'application/json'
             },
         };
-        const response = await fetch(manufacturerUrl, fetchConfig);
+        const response = await fetch(vehicleUrl, fetchConfig);
         if (response.ok) {
             setState({
                 name:'',
+                manufacturer:'',
+                picture_url:'',
             });
         }
     }
@@ -36,11 +40,19 @@ return (
         <div className="row">
         <div className="offset-3 col-6">
         <div className="shadow p-4 mt-4">
-            <h1>Add a Car Manufacturer</h1>
+            <h1>Add a new Model</h1>
             <form onSubmit={handleSubmit} id="create-customer-form">
             <div className="form-floating mb-3">
-                <input onChange={handleChange} value = {state.name}placeholder="Manufacturer" required type="text" name="name" id="name" className="form-control" />
+                <input onChange={handleChange} value = {state.name}placeholder="Name" required type="text" name="name" id="name" className="form-control" />
+                <label htmlFor="name">Name</label>
+            </div>
+            <div className="form-floating mb-3">
+                <input onChange={handleChange} value = {state.manufacturer}placeholder="Manufacturer" required type="text" name="manufacturer" id="manufacturer" className="form-control" />
                 <label htmlFor="name">Manufacturer</label>
+            </div>
+            <div className="form-floating mb-3">
+                <input onChange={handleChange} value = {state.picture_url}placeholder="Picture" required type="text" name="picture_url" id="picture_url" className="form-control" />
+                <label htmlFor="name">Picture</label>
             </div>
             <button className="btn btn-primary">Create</button>
             </form>
@@ -50,4 +62,4 @@ return (
     );
 }
 
-export default ManufacturerForm;
+export default VehicleForm;
