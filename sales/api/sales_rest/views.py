@@ -23,18 +23,29 @@ class SalesRecordListEncoder(ModelEncoder):
     model = SalesRecord
     properties = ["salesperson", "sale_price", "customer", "automobile"]
     encoders = {
-        "salesperson": SalespersonListEncoder,
-        "automobile": AutomobileVOEncoder,
-        "customer": CustomerListEncoder,
+        "salesperson": SalespersonListEncoder(),
+        "automobile": AutomobileVOEncoder(),
+        "customer": CustomerListEncoder(),
     }
+
+    # def get_extra_data(self, o):
+    #     return {
+    #         "salesperson": {
+    #             "employee_number": o.salesperson.employee_number,
+    #             "name": o.salesperson.name
+    #         },
+    #         "automobile": o.automobile.vin,
+    #         "customer": o.salesperson.name,
+        # }
+
 
 class SalesRecordDetailEncoder(ModelEncoder):
     model = SalesRecord 
     properties = ["id", "sale_price", "automobile", "salesperson", "customer"]
     encoders = {
-        "salesperson": SalespersonListEncoder,
-        "automobile": AutomobileVOEncoder,
-        "customer": CustomerListEncoder,
+        "salesperson": SalespersonListEncoder(),
+        "automobile": AutomobileVOEncoder(),
+        "customer": CustomerListEncoder(),
     }
 
 
@@ -92,9 +103,8 @@ def api_list_sales(request):
             customer = Customer.objects.get(name=customer_name)
             content["customer"] = customer
         except Customer.DoesNotExist:
-            return JsonResponse(
-
-            )
+            return JsonResponse({"message": "Invalid customer"}, status=400)
+            
         
         sales = SalesRecord.objects.create(**content)
         return JsonResponse(
@@ -102,6 +112,3 @@ def api_list_sales(request):
             encoder=SalesRecordDetailEncoder, 
             safe=False,
         )
-        
-
-

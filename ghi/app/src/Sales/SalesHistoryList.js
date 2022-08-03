@@ -1,34 +1,49 @@
-import React, { useEffect, useState} from 'react';
+import React, { Component } from 'react';
 
-function SalesHistoryList() {
-    const [salespeople, setSalespeople] = useState([])
-    const [salesHistory, setSalesHistory] = useState([])
-    const [salesData, setSalesData] = useState([])
-
-    useEffect(() => {
-        const fetchSalesData = async () => {
-            const url = 'http://localhost:8090/api/sales/'
-            const response = await fetch(url)
-            const salespeopleJson = await response.json();
-            setSalespeople(salespeopleJson.sales);
-            setSalesData(salespeopleJson.sales);
-        };
-        fetchSalesData();
-    }, []);
-
-    const handleChange = event => {
-        const value = event.target.value;
-        setSalesHistory({
-            ...salesHistory,
-            [event.target.name]:value,
-        })
+class SalesHistoryList extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            sales: [],
+            salespeople: [],
+            salesRecord: [],
+        }
     }
+
+    async componentDidMount() {
+        const salesUrl = "http://localhost:8090/api/sales"
+        const salespeopleUrl = "http://localhost:8090/api/salespeople"
+
+        const salesResponse = await fetch(salesUrl);
+        const salespeopleResponse = await fetch(salespeopleUrl)
+
+        if (salesResponse.ok && salespeopleResponse.ok) {
+            const salesData = await salesResponse.json();
+            const salespeopleData = await salespeopleResponse.json();
+
+            this.setState({
+                sales: salesData.sales,
+                salespeople: salespeopleData.salespeople})
+        }
+    }
+
+
+    async handleChange(event) {
+        const value = event.target.value
+        const key = event.target.name
+        const changeDict = {}
+        changeDict[key] = value
+        this.setState(changeDict)
+    }
+
+render() {
     return (
         <>
         <h1>Sales person history</h1>
-        <select onChange={handleChange} value={salesHistory} required name="Sales history" id="salesperson" className="form-select">
+        <select onChange={this.handleChange} value={this.state.salespeople}required name="salesperson" id="salesperson" className="form-select">
             <option value="">Choose a salesperson</option>
-                    {salespeople.map(salesperson => {
+                    {this.state.salespeople.map(salesperson => {
+                    console.log(salesperson)
                         return (
                         <option key={salesperson.employee_number} value={salesperson.employee_number}>{salesperson.name}</option>
                         )
@@ -44,13 +59,13 @@ function SalesHistoryList() {
                 </tr>
             </thead>
             <tbody>
-                {salesData.map(salesperson => {
+                {this.state.salesRecord.map(salesrecord => {
                     return (
-                        <tr key={salesperson.vin}>
-                            <td>{salesperson.salesperson.name}</td>
-                            <td>{salesperson.customer}</td>
-                            <td>{salesperson.vin}</td>
-                            <td>{salesperson.sale_price}</td>
+                        <tr key={salesrecord.id}>
+                            <td>{salesrecord.salesperson.name}</td>
+                            <td>{salesrecord.customer.name}</td>
+                            <td>{salesrecord.automobile.vin}</td>
+                            <td>{salesrecord.sale_price}</td>
                         </tr>
                     );
                 })}
@@ -58,6 +73,7 @@ function SalesHistoryList() {
         </table>
      </>
     );
+}
 }
 
 export default SalesHistoryList;

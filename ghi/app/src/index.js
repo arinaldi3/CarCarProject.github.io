@@ -14,6 +14,7 @@ async function loadSales() {
   const salespeopleUrl = "http://localhost:8090/api/salespeople/";
   const customerUrl = "http://localhost:8090/api/customers/";
   const salesUrl = "http://localhost:8090/api/sales/";
+  
 
   const autosResponse = await fetch(autosUrl);
   const salespeopleResponse = await fetch(salespeopleUrl);
