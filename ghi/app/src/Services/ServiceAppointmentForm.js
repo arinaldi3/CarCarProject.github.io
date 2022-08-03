@@ -7,7 +7,7 @@ function ServiceAppointmentForm() {
         date: '',
         time:'',
         reason:'',
-        technican: '',
+        technician: '',
     });
     const [technicians, setTechnicians] = useState([])
 
@@ -51,7 +51,7 @@ function ServiceAppointmentForm() {
         const value = event.target.value;
         setState({
             ...state,
-            [event.target.value]: value
+            [event.target.name]: value
         })
     }
     
