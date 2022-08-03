@@ -56,15 +56,15 @@ function CustomerForm() {
             <form onSubmit={handleSubmit} id="create-customer-form">
             <div className="form-floating mb-3">
                 <input onChange={handleChange} value = {state.name}placeholder="Customer Name" required type="text" name="name" id="name" className="form-control" />
-                <label htmlFor="starts">Customer Name</label>
+                <label htmlFor="name">Customer Name</label>
             </div>
             <div className="form-floating mb-3">
                 <input onChange={handleChange} value = {state.address}placeholder="Address" required type="text" name="address" id="address" className="form-control" />
-                <label htmlFor="starts">Address</label>
+                <label htmlFor="address">Address</label>
             </div>
             <div className="form-floating mb-3">
                 <input onChange={handleChange} value = {state.phone_number}placeholder="Phone Number" required type="number" name="phone_number" id="phone_number" className="form-control" />
-                <label htmlFor="starts">Phone Number</label>
+                <label htmlFor="phone_number">Phone Number</label>
             </div>
             <button className="btn btn-primary">Create</button>
             </form>

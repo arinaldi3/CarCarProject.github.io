@@ -1,5 +1,5 @@
-import React, { Component, useEffect, useState} from 'react';
-import { renderMatches } from 'react-router-dom';
+import React, { Component } from 'react';
+// import { renderMatches } from 'react-router-dom';
 
 class SalesList extends Component {
     constructor(props) {
