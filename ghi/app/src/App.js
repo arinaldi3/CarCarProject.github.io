@@ -3,7 +3,7 @@ import MainPage from './MainPage';
 import Nav from './Nav';
 import ServiceAppointmentForm from './Services/ServiceAppointmentForm';
 import ServiceAppointmentList from './Services/ServiceAppointmentList';
-
+import ServiceAppointmentHistory from './Services/ServiceHistoryList';
 import ManufacturerList from './Inventory/ManufacturerList';
 import VehicleList from './Inventory/VehicleList';
 import AutomobileList from './Inventory/AutomobileList';
@@ -31,6 +31,7 @@ function App(props) {
           <Route path="/appointments" >
             <Route path="new" element={<ServiceAppointmentForm/>} />
             <Route path="" element={<ServiceAppointmentList/>}/>
+            <Route path="history" element={<ServiceAppointmentHistory/>}/>
           </Route>
           <Route path ="technicians" >
             <Route path="new" element={<TechnicianForm/>} />

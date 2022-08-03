@@ -29,7 +29,7 @@ return (
                         <td>{vehicle.manufacturer.name}</td>
                         <td>{vehicle.name}</td>
                         <td>
-                            <img src={vehicle.picture_url} alt="" />
+                            <img src={vehicle.picture_url} alt="" style={{maxHeight: "300px", maxWidth:"300px", minHeight: "300px", minWidth:"300px", objectFit: 'contain'}}/>
                         </td>
                     </tr>
                 );

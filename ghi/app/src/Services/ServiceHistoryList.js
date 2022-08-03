@@ -1,26 +1,26 @@
-import React, { Component } from 'react';
+import React, { useEffect, useState } from 'react';
 
 function ServiceAppointmentHistory() {
 
     const [search, setSearch] = useState ('')
-    const [appointment, setAppointment] = useState ([])
-    const [filteredAppointments, setfilteredAppointments] = useState ([])
+    const [input, setInput] = useState('')
+    const [appointments, setAppointments] = useState ([])
 
     const fetchAppointments = async () => {
         const appointmentUrl = 'http://localhost:8080/api/appointments/'
         const response = await fetch(appointmentUrl)
         const appointmentData = await response.json();
-        setAppointment(appointmentData.appointments)
+        setAppointments(appointmentData.appointments)
     }
-
-    const handleClick = async
-}
+    useEffect(() => {
+        fetchAppointments()
+    }, []);
 
 return (
     <>
         <form className="form-inline">
-            <input className="form-control mr-sm-2" type="search" placeholder="Search VIN" aria-label="Search"/>
-            <button className="btn btn-outline-success my-2 my-sm-0" type="submit" onClick={() => appointments.filter(appointment => appointment.vin===search)}>Search VIN</button>
+            <input className="form-control mr-sm-2" type="search" placeholder="Search VIN" onChange = {(e) => setInput(e.target.value)} aria-label="Search"/>
+            <button className="btn btn-outline-success my-2 my-sm-0" type="submit"  onClick={(e) => {e.preventDefault(); setSearch(input)}}>Search VIN</button>
         </form>
         <table className="table table-striped">
             <thead>
@@ -35,6 +35,7 @@ return (
             </thead>
             <tbody>
                 {appointments.map(appointment => {
+                    if (appointment.vin.includes(search)){
                     return (
                         <tr key={appointment.id}>
                             <td> {appointment.vin} </td>
@@ -43,13 +44,13 @@ return (
                             <td> {new Date(appointment.date).toLocaleTimeString('en-US')} </td>
                             <td> {appointment.reason} </td>
                             <td> {appointment.technician.technician_name} </td>
-                            <td><button className="btn btn-success" onClick={() => cancelAppointment(appointment.id)}>Finished</button></td>
                         </tr>
                     );
+                    }
                 })}
             </tbody>
         </table>
         </>
-);
-
-}
+    );
+ }
+export default ServiceAppointmentHistory;

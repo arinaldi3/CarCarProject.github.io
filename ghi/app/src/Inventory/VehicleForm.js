@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 function VehicleForm() {
     const [state, setState] = useState({
         name:'',
-        manufacturer:'',
+        manufacturer_id:'',
         picture_url:'',
 
     });
@@ -35,7 +35,7 @@ function VehicleForm() {
         if (response.ok) {
             setState({
                 name:'',
-                manufacturer:'',
+                manufacturer_id:'',
                 picture_url:'',
             });
         }
@@ -62,7 +62,7 @@ return (
                 <label htmlFor="name">Picture</label>
             </div>
             <div className="mb-3">
-                    <select onChange={handleChange} value = {state.manufacturer} required name="manufacturer" id="manufacturer" className="form-select">
+                    <select onChange={handleChange} value = {state.manufacturer_id} required name="manufacturer_id" id="manufacturer_id" className="form-select">
                     <option value="">Choose a Manufacturer</option>
                     {manufacturers.map(manufacturer => {
                         console.log(manufacturer)

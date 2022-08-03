@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 function TechnicianForm(){
     const [state, setState] = useState({
-        name:'',
+        technician_name:'',
         employee_number:'',
     });
 
@@ -21,7 +21,7 @@ function TechnicianForm(){
         const technicianResponse  = await fetch(technicianUrl, fetchConfig)
         if (technicianResponse.ok) {
             setState({
-                name:'',
+                technician_name:'',
                 employee_number:'',
             });
         }
@@ -40,7 +40,7 @@ function TechnicianForm(){
                 <h1>Add a Technician</h1>
                 <form onSubmit={handleSubmit} id="create-customer-form">
                 <div className="form-floating mb-3">
-                    <input onChange={handleChange} value = {state.name}placeholder="Technician Name" required type="text" name="name" id="name" className="form-control" />
+                    <input onChange={handleChange} value = {state.technician_name}placeholder="Technician Name" required type="text" name="technician_name" id="technician_name" className="form-control" />
                     <label htmlFor="name">Technician Name</label>
                 </div>
                 <div className="form-floating mb-3">

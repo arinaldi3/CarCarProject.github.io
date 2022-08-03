@@ -5,7 +5,7 @@ function AutomobileForm() {
         vin:'',
         color:'',
         year:'',
-        model:'',
+        model_id:'',
     });
     const [models, setModels] = useState([])
 
@@ -23,6 +23,7 @@ function AutomobileForm() {
         event.preventDefault();
         const data = state;
         console.log(data)
+
         const automobileUrl = 'http://localhost:8100/api/automobiles/'
         const fetchConfig = {
             method: "post",
@@ -37,12 +38,15 @@ function AutomobileForm() {
                 vin:'',
                 color:'',
                 year:'',
-                model:'',
+                model_id:'',
             });
         }
     }
     const handleChange = event => {
-        const value = event.target.value;
+        let value = event.target.value;
+        if (event.target.name === "year" || event.target.name === "model_id"){
+            value = Number(value)
+        }
         setState({
             ...state,
             [event.target.name]: value
@@ -67,7 +71,7 @@ return (
                 <label htmlFor="name">Year</label>
             </div>
             <div className="mb-3">
-                    <select onChange={handleChange} value = {state.model} required name="model" id="model" className="form-select">
+                    <select onChange={handleChange} value = {state.model_id} required name="model_id" id="model_id" className="form-select">
                     <option value="">Choose a Model</option>
                     {models.map(model => {
                         return (

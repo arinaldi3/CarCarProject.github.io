@@ -53,6 +53,7 @@ function ServiceAppointmentForm() {
             ...state,
             [event.target.name]: value
         })
+        console.log(state)
     }
     
 
@@ -86,7 +87,7 @@ return (
                     <label htmlFor="reason">Reason</label>
                 </div>
                 <div className="mb-3">
-                    <select onChange={handleChange} value = {state.technican} required name="technician" id="technician" className="form-select">
+                    <select onChange={handleChange} value = {state.technician} required name="technician" id="technician" className="form-select">
                     <option value="">Choose a technician</option>
                     {technicians.map(technician => {
                         return (
