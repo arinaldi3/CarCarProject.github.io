@@ -31,10 +31,16 @@ class SalesForm extends React.Component {
             const autosData = await autosResponse.json();
             const salespeopleData = await salespeopleResponse.json();
             const customerData = await customerResponse.json();
-            // const salesData = await salesResponse.json();
+            const salesData = await salesResponse.json();
+
+            const soldCars = salesData.sales.map(sales => sales.automobile.vin);
+            console.log(soldCars)
+            const unSoldCars = autosData.autos.filter(autos => !soldCars.includes(autos.vin))
+            console.log(unSoldCars)
+
 
             this.setState({
-                autos: autosData.autos,
+                autos: unSoldCars,
                 salespeople: salespeopleData.salespeople,
                 customers: customerData.customers,
             });

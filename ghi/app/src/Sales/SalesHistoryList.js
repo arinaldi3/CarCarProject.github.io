@@ -6,7 +6,7 @@ class SalesHistoryList extends Component {
         this.state = {
             sales: [],
             salespeople: [],
-            salesRecord: [],
+            salesperson: '',
         }
     }
 
@@ -20,30 +20,42 @@ class SalesHistoryList extends Component {
         if (salesResponse.ok && salespeopleResponse.ok) {
             const salesData = await salesResponse.json();
             const salespeopleData = await salespeopleResponse.json();
+            console.log(salesData)
+        
+
+
+            // const unfilteredSalesRecord = salesData.sales.map(sales => sales.salespeople)
+            // const filteredSalesRecord = salespeopleData.
+            // console.log(filteredSalesRecord)
+        
 
             this.setState({
                 sales: salesData.sales,
                 salespeople: salespeopleData.salespeople})
+                // console.log(salesData.sales)
+                // console.log(salespeopleData.salespeople)
         }
     }
 
-
-    async handleChange(event) {
-        const value = event.target.value
-        const key = event.target.name
-        const changeDict = {}
-        changeDict[key] = value
-        this.setState(changeDict)
+    handleChange(event) {
+        const value = event.target.value;
+        this.setState({salesperson:value})
     }
+    // async handleChange(event) {
+    //     const value = event.target.value
+    //     const key = event.target.name
+    //     const changeDict = {}
+    //     changeDict[key] = value
+    //     this.setState(changeDict)
+    // }
 
 render() {
     return (
         <>
         <h1>Sales person history</h1>
-        <select onChange={this.handleChange} value={this.state.salespeople}required name="salesperson" id="salesperson" className="form-select">
+        <select onChange={this.handleChange} value={this.state.sales.salesperson}required name="salesperson" id="salesperson" className="form-select">
             <option value="">Choose a salesperson</option>
                     {this.state.salespeople.map(salesperson => {
-                    console.log(salesperson)
                         return (
                         <option key={salesperson.employee_number} value={salesperson.employee_number}>{salesperson.name}</option>
                         )
@@ -59,15 +71,20 @@ render() {
                 </tr>
             </thead>
             <tbody>
-                {this.state.salesRecord.map(salesrecord => {
-                    return (
-                        <tr key={salesrecord.id}>
-                            <td>{salesrecord.salesperson.name}</td>
-                            <td>{salesrecord.customer.name}</td>
-                            <td>{salesrecord.automobile.vin}</td>
-                            <td>{salesrecord.sale_price}</td>
-                        </tr>
-                    );
+                {this.state.sales.map(salesrecord => {
+                    if (salesrecord.salesperson===true) {
+                        return (
+                            <tr key={salesrecord.id}>
+                                <td>{salesrecord.salesperson.name}</td>
+                                <td>{salesrecord.customer.name}</td>
+                                <td>{salesrecord.automobile.vin}</td>
+                                <td>{salesrecord.sale_price}</td>
+                            </tr>
+                        );
+                    }
+                    else {
+                        return '';
+                    }
                 })}
             </tbody>
         </table>
