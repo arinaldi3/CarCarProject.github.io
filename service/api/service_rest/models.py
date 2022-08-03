@@ -14,7 +14,7 @@ class Technician(models.Model):
 class ServiceAppoinment(models.Model):
     vin = models.CharField(max_length=50)
     customer_name = models.CharField(max_length=100)
-    date = models.DateField(null=True)
+    date = models.DateTimeField(auto_now=True, null=True)
     time = models.TimeField(null=True)
     technician = models.ForeignKey( 'Technician', related_name="appointment", on_delete=models.PROTECT)
     reason = models.CharField(max_length=200)

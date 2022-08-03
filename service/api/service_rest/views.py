@@ -54,7 +54,10 @@ def api_list_technicians(request):
 def api_list_appointments(request):
     if request.method == "GET":
         appointments = ServiceAppoinment.objects.all()
-        return JsonResponse({"appointments": appointments}, encoder=AppointmentListEndcoder)
+        for app in appointments:
+            time = getattr(app,'time')
+            setattr(app,'time',str(time))
+        return JsonResponse({"appointments": appointments}, encoder=AppointmentListEndcoder, safe=False)
     else:
         content = json.loads(request.body)
         try:

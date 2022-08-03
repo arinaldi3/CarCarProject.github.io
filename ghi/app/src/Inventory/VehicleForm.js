@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 function VehicleForm() {
     const [state, setState] = useState({
@@ -7,6 +7,17 @@ function VehicleForm() {
         picture_url:'',
 
     });
+    const [manufacturers, setManufacturers] = useState([])
+
+    const fetchManufacturers = async () => {
+        const manufacturerUrl = 'http://localhost:8100/api/manufacturers/'
+        const manufacturerResponse = await fetch(manufacturerUrl)
+        const manufacturerJson = await manufacturerResponse.json();
+        setManufacturers(manufacturerJson.manufacturers)
+    }
+    useEffect(() => {
+        fetchManufacturers()
+    }, []);
 
     const handleSubmit = async event => {
         event.preventDefault();
@@ -47,13 +58,20 @@ return (
                 <label htmlFor="name">Name</label>
             </div>
             <div className="form-floating mb-3">
-                <input onChange={handleChange} value = {state.manufacturer}placeholder="Manufacturer" required type="text" name="manufacturer" id="manufacturer" className="form-control" />
-                <label htmlFor="name">Manufacturer</label>
-            </div>
-            <div className="form-floating mb-3">
-                <input onChange={handleChange} value = {state.picture_url}placeholder="Picture" required type="text" name="picture_url" id="picture_url" className="form-control" />
+                <input onChange={handleChange} value = {state.picture_url}placeholder="Picture Url" required type="text" name="picture_url" id="picture_url" className="form-control" />
                 <label htmlFor="name">Picture</label>
             </div>
+            <div className="mb-3">
+                    <select onChange={handleChange} value = {state.manufacturer} required name="manufacturer" id="manufacturer" className="form-select">
+                    <option value="">Choose a Manufacturer</option>
+                    {manufacturers.map(manufacturer => {
+                        console.log(manufacturer)
+                        return (
+                        <option key={manufacturer.id} value={manufacturer.id}>{manufacturer.name}</option>
+                        )
+                    })}
+                    </select>
+                </div>
             <button className="btn btn-primary">Create</button>
             </form>
         </div>

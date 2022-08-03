@@ -1,25 +1,35 @@
-import React, { Component } from 'react'
+import React, { useState, useEffect } from 'react'
 
 
-class ServiceAppointmentList extends Component {
-    constructor(props){
-        super(props)
-        this.state = {appointments: []}
+function ServiceAppointmentList() {
+
+    const [appointments,setAppointments] = useState([])
+    
+    const fetchAppointments = async () => {
+        const appointmentUrl = 'http://localhost:8080/api/appointments/'
+        const response = await fetch(appointmentUrl)
+        const {appointments} = await response.json();
+        console.log(appointments)
+        setAppointments(appointments)
     }
-    async componentDidMount()
-    {
-        const url = 'http://localhost:8080/api/appointments/'
-        const response = await fetch(url)
-        if (response.ok)
-        {
-        const data = await response.json()
-        this.setState({appointments: data.appointments})
+    useEffect(() => {
+        fetchAppointments()
+    }, []);
+    
+    const cancelAppointment = async (id) => {
+        const cancelUrl = `http://localhost:8080/api/appointments/${id}/`
+        const fetchConfig = {
+            method: "delete"
+        }
+        const cancelResponse = await fetch(cancelUrl, fetchConfig)
+        if (cancelResponse.ok){
+            let updatedAppointments = [];
+            updatedAppointments = appointments.filter(appointment => appointment.id !== id)
+            setAppointments(updatedAppointments);
         }
     }
 
-
-    render(){
-        return (
+    return (
             <table className="table table-striped">
                 <thead>
                     <tr>
@@ -32,15 +42,17 @@ class ServiceAppointmentList extends Component {
                     </tr>
                 </thead>
                 <tbody>
-                    {this.state.appointments.map(appointment => {
+                    {appointments.map(appointment => {
                         return (
                             <tr key={appointment.id}>
                                 <td> {appointment.vin} </td>
                                 <td> {appointment.customer_name} </td>
-                                <td> {appointment.date} </td>
-                                <td> {appointment.time} </td>
+                                <td> {new Date(appointment.date).toLocaleDateString()} </td>
+                                <td> {new Date(appointment.date).toLocaleTimeString('en-US')} </td>
                                 <td> {appointment.reason} </td>
-                                <td> {appointment.technician} </td>
+                                <td> {appointment.technician.technician_name} </td>
+                                <td><button className="btn btn-danger" onClick={() => cancelAppointment(appointment.id)}>Cancel</button></td>
+                                <td><button className="btn btn-success" onClick={() => cancelAppointment(appointment.id)}>Finished</button></td>
                             </tr>
                         );
                     })}
@@ -48,5 +60,5 @@ class ServiceAppointmentList extends Component {
             </table>
         );
     }
-}
+
 export default ServiceAppointmentList;

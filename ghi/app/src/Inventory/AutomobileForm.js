@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect,useState } from 'react';
 
 function AutomobileForm() {
     const [state, setState] = useState({
@@ -6,14 +6,23 @@ function AutomobileForm() {
         color:'',
         year:'',
         model:'',
-        manufacturer:'',
-
     });
+    const [models, setModels] = useState([])
+
+    const fetchAutomobiles = async () => {
+        const autoUrl = 'http://localhost:8100/api/models/'
+        const automobileResponse = await fetch(autoUrl)
+        const automobileData = await automobileResponse.json();
+        setModels(automobileData.models)
+    }
+    useEffect(() => {
+        fetchAutomobiles()
+    }, []);
 
     const handleSubmit = async event => {
         event.preventDefault();
         const data = state;
-
+        console.log(data)
         const automobileUrl = 'http://localhost:8100/api/automobiles/'
         const fetchConfig = {
             method: "post",
@@ -29,7 +38,6 @@ function AutomobileForm() {
                 color:'',
                 year:'',
                 model:'',
-                manufacturer:'',
             });
         }
     }
@@ -55,17 +63,19 @@ return (
                 <label htmlFor="name">Color</label>
             </div>
             <div className="form-floating mb-3">
-                <input onChange={handleChange} value = {state.year}placeholder="Year" required type="text" name="year" id="year" className="form-control" />
+                <input onChange={handleChange} value = {state.year}placeholder="Year" required type="number" name="year" id="year" className="form-control" />
                 <label htmlFor="name">Year</label>
             </div>
-            <div className="form-floating mb-3">
-                <input onChange={handleChange} value = {state.model}placeholder="Model" required type="text" name="model" id="model" className="form-control" />
-                <label htmlFor="name">Model</label>
-            </div>
-            <div className="form-floating mb-3">
-                <input onChange={handleChange} value = {state.manufacturer}placeholder="Manufacturer" required type="text" name="Manufacturer" id="Manufacturer" className="form-control" />
-                <label htmlFor="name">Manufacturer</label>
-            </div>
+            <div className="mb-3">
+                    <select onChange={handleChange} value = {state.model} required name="model" id="model" className="form-select">
+                    <option value="">Choose a Model</option>
+                    {models.map(model => {
+                        return (
+                        <option key={model.id} value={model.id}>{model.name}</option>
+                        )
+                    })}
+                    </select>
+                </div>
             <button className="btn btn-primary">Create</button>
             </form>
         </div>
