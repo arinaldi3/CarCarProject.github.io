@@ -29,14 +29,15 @@ render() {
                 </tr>
             </thead>
             <tbody>
-                {this.state.sales.map(salesperson => {
+                {this.state.sales.map(sale => {
+                    console.log(sale)
                     return (
-                        <tr key={salesperson.automobile}>
-                            <td>{salesperson.salesperson.name}</td>
-                            <td>{salesperson.salesperson.employee_number}</td>
-                            <td>{salesperson.year}</td>
-                            <td>{salesperson.automobile}</td>
-                            <td>{salesperson.sale_price}</td>
+                        <tr key={sale.automobile.vin}>
+                            <td>{sale.salesperson.name}</td>
+                            <td>{sale.salesperson.employee_number}</td>
+                            <td>{sale.customer.name}</td>
+                            <td>{sale.automobile.vin}</td>
+                            <td>{sale.sale_price}</td>
                         </tr>
                     );
                 })}

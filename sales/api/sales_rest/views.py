@@ -60,7 +60,8 @@ def api_list_salespeople(request):
         try: 
             salesperson = Salesperson.objects.create(**content)
             return JsonResponse(salesperson, encoder=SalespersonListEncoder, safe=False)
-        except: 
+        except Exception as e: 
+            print(e)
             return JsonResponse({"message": "employee number already exists"})
 
 

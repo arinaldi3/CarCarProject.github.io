@@ -13,17 +13,22 @@ class SalespersonForm extends React.Component {
     }
 
     async handleChange(event) {
+        event.preventDefault();
         const value = event.target.value
         const key = event.target.name
         const changeDict = {}
         changeDict[key] = value
-        this.setState(changeDict)
+        this.setState((prevState) => {
+            return prevState[key] = value
+        })
 }
     async handleSubmit(event) {
         event.preventDefault();
-        const data = {...this.state};
+        const data = {
+            name:this.state.name,
+            "employee_number": this.state.employee_number,
+        }
         console.log(data)
-        delete data.employee_number;
 
         const salespersonUrl = "http://localhost:8090/api/salespeople/";
         const fetchConfig = {
