@@ -16,12 +16,12 @@ class CustomerListEncoder(ModelEncoder):
 
 class SalespersonListEncoder(ModelEncoder):
     model = Salesperson
-    properties = ["name", "employee_number"]
+    properties = ["name", "employee_number", "id"]
 
 
 class SalesRecordListEncoder(ModelEncoder):
     model = SalesRecord
-    properties = ["salesperson", "sale_price", "customer", "automobile"]
+    properties = ["salesperson", "sale_price", "customer", "automobile", "id"]
     encoders = {
         "salesperson": SalespersonListEncoder(),
         "automobile": AutomobileVOEncoder(),
@@ -63,6 +63,20 @@ def api_list_salespeople(request):
         except Exception as e: 
             print(e)
             return JsonResponse({"message": "employee number already exists"})
+
+
+@require_http_methods(["DELETE"])
+def api_delete_salesperson(request, pk):
+    try:
+        salesperson = Salesperson.objects.get(id=pk)
+        salesperson.delete()
+        return JsonResponse(
+            salesperson,
+            encoder=SalespersonListEncoder, 
+            safe=False,
+        )
+    except Salesperson.DoesNotExist:
+        return JsonResponse({"message": "Salesperson does not exist"})
 
 
 @require_http_methods(["GET", "POST"])
@@ -113,3 +127,9 @@ def api_list_sales(request):
             encoder=SalesRecordDetailEncoder, 
             safe=False,
         )
+
+@require_http_methods(["DELETE"])
+def delete_sale(request, pk):
+    count, _ = SalesRecord.objects.filter(id=pk).delete()
+    return JsonResponse({"deleted": count > 0})
+
