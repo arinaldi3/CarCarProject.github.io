@@ -25,10 +25,6 @@ class SalesHistoryList extends Component {
             const salespeopleData = await salespeopleResponse.json();
             console.log(salesData)
 
-            // const unfilteredSalesRecord = salesData.sales.map(sales => sales.salespeople)
-            // const filteredSalesRecord = salespeopleData.
-            // console.log(filteredSalesRecord)
-
             this.setState({
                 sales: salesData.sales,
                 salespeople: salespeopleData.salespeople})

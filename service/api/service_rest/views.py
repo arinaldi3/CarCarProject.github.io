@@ -56,6 +56,8 @@ def api_list_appointments(request):
         appointments = ServiceAppoinment.objects.all()
         for app in appointments:
             time = getattr(app,'time')
+            date = getattr(app,'date')
+            setattr(app, 'date', str(date))
             setattr(app,'time',str(time))
         return JsonResponse({"appointments": appointments}, encoder=AppointmentListEndcoder, safe=False)
     else:

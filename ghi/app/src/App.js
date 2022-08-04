@@ -20,7 +20,7 @@ import AutomobileForm from './Inventory/AutomobileForm';
 
 
 
-function App(props) {
+function App() {
  
   return (
     <BrowserRouter>
