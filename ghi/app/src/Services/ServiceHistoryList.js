@@ -18,6 +18,7 @@ function ServiceAppointmentHistory() {
 
 return (
     <>
+        <h1>Service Appointment History</h1>
         <form className="form-inline">
             <input className="form-control mr-sm-2" type="search" placeholder="Search VIN" onChange = {(e) => setInput(e.target.value)} aria-label="Search"/>
             <button className="btn btn-outline-success my-2 my-sm-0" type="submit"  onClick={(e) => {e.preventDefault(); setSearch(input)}}>Search VIN</button>

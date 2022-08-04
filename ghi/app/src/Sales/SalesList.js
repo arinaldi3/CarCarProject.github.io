@@ -18,6 +18,8 @@ class SalesList extends Component {
 
 render() {
     return (
+        <>
+            <h1>Car Sales</h1>
             <table className="table table-striped">
             <thead>
                 <tr>
@@ -43,6 +45,7 @@ render() {
                 })}
             </tbody>
         </table>
+        </>
         );
     }
 }

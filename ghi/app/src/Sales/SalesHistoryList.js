@@ -58,7 +58,7 @@ class SalesHistoryList extends Component {
 render() {
     return (
         <>
-        <h1>Sales person history</h1>
+        <h1>Sales History</h1>
         <select onChange={this.handleChange} value={this.state.sales.salesperson}required name="salesperson" id="salesperson" className="form-select">
             <option value="">Choose a salesperson</option>
                     {this.state.salespeople.map(salesperson => {
