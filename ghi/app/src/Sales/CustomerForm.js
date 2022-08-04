@@ -7,17 +7,6 @@ function CustomerForm() {
         phone_number: '',
     });
 
-    // const [customers, setCustomers] = useState([]);
-
-    // useEffect(() => {
-    //     const fetchCustomerData = async () => {
-    //         const url = 'http://localhost:8090/api/customers/'
-    //         const response = await fetch(url)
-    //         const customersJson = await response.json();
-    //         setCustomers(customersJson.customers)
-    //     };
-    //     fetchCustomerData();
-    // }, []);
 
     const handleSubmit = async event => {
         event.preventDefault();

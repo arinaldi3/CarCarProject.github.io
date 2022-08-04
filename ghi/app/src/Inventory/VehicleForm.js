@@ -65,7 +65,6 @@ return (
                     <select onChange={handleChange} value = {state.manufacturer_id} required name="manufacturer_id" id="manufacturer_id" className="form-select">
                     <option value="">Choose a Manufacturer</option>
                     {manufacturers.map(manufacturer => {
-                        console.log(manufacturer)
                         return (
                         <option key={manufacturer.id} value={manufacturer.id}>{manufacturer.name}</option>
                         )
