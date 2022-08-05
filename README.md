@@ -3,9 +3,9 @@
 Team:
 
 * Person 1 - Which microservice?
-Nate Endicott - Auto Services
+Nate Endicott - Auto Services Microservice
 * Person 2 - Which microservice?
-Ava Rinaldi - Auto Sales
+Ava Rinaldi - Auto Sales Microservice
 
 ## Design
 On the homepage, there are three dropdowns of the three different category components of the project. Users can navigate through the dropdowns to access the Dealership Inventory, Services, and Sales.
