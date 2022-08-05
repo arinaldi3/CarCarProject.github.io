@@ -1,5 +1,6 @@
 import { NavLink } from 'react-router-dom';
 
+
 function Nav() {
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-success">
@@ -11,8 +12,8 @@ function Nav() {
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
           <li className="nav-item dropdown">
-            <a className="nav-link dropdown-toggle" href='#' role="button" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Dealership Inventory</a>
-            <ul className="dropdown-menu">
+            <a className="nav-link dropdown-toggle" href='#' role="button" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true" >Dealership Inventory</a> 
+            <ul className="dropdown-menu"> 
               <li><NavLink className='dropdown-item' to="/manufacturers/new">Create a Manufacturer</NavLink></li>
               <li><NavLink className="dropdown-item" to="/manufacturers">Manufacturer List</NavLink></li>
               <li><NavLink className="dropdown-item" to="/vehicles/new">Create a Car Model</NavLink></li>

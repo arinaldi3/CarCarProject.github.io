@@ -14,6 +14,9 @@ Ava Rinaldi - Auto Sales
 Explain your models and integration with the inventory
 microservice, here.
 
+
+For Services, you had to keep track of service appoints for automobiles and their customres. In doing so, you had to keep track of the VIN of the sepecifc vehicle in the inventory in order to filter for it for one of the microservices. 
+
 ## Sales microservice
 
 Explain your models and integration with the inventory
