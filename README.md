@@ -35,7 +35,7 @@ Sales
 
 ## Service microservice
 
-For Services, you had to keep track of service appoints for automobiles and their customres. In doing so, you had to keep track of the VIN of the sepecifc vehicle in the inventory in order to filter for it for one of the microservices. 
+For Services, you had to keep track of service appointments for automobiles and their customers. In doing so, you had to keep track of the VIN of the specific vehicle in the inventory in order to filter for it for one of the microservices. 
 
 ## Sales microservice
 
