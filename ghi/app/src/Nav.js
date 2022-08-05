@@ -25,7 +25,7 @@ function Nav() {
             <a className="nav-link dropdown-toggle" href='#' role="button" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Services</a>
             <ul className="dropdown-menu">
               <li><NavLink className="dropdown-item" to="/technicians/new">Enter a Technician</NavLink></li>
-              <li><NavLink className="dropdown-item" to="/appointments/new">Enter a Service Appointment</NavLink></li>
+              <li><NavLink className="dropdown-item" to="/appointments/new">Create a Service Appointment</NavLink></li>
               <li><NavLink className="dropdown-item" to="/appointments">Service Appointment List</NavLink></li>
               <li><NavLink className="dropdown-item" to="/appointments/history">Service Appointment History</NavLink></li>
             </ul>
